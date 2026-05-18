@@ -9,14 +9,12 @@
     <link rel="stylesheet" href="TemplateData/style.css">
     
     <style>
-      /* 1. 하단 푸터 숨기기 (로고는 교체를 위해 유지!) */
       #unity-footer { display: none !important; }
       
-      /* 2. 배경 및 화면 정렬 (완벽한 중앙 정렬 강제) */
       body {
         margin: 0 !important;
         padding: 0 !important;
-        background-color: #222C36 !important; /* 원하시는 배경색으로 변경 가능 */
+        background-color: #222C36 !important; 
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
@@ -25,7 +23,6 @@
         overflow: hidden !important;
       }
 
-      /* 3. 컨테이너 9:16 비율 고정 및 위치 강제 초기화 */
       #unity-container {
         position: relative !important;
         left: auto !important;
@@ -42,36 +39,33 @@
         background-color: black !important;
       }
 
-      /* 4. 캔버스 영역 꽉 채우기 */
       #unity-canvas {
         width: 100% !important;
         height: 100% !important;
         object-fit: contain !important;
       }
 
-      /* 5. 커스텀 로고 크기 및 비율 강제 조정 */
       #unity-logo {
         width: 300px !important;  
         height: 300px !important; 
         background-size: contain !important; 
         background-position: center !important;
         background-repeat: no-repeat !important;
-        margin: 0 !important; /* 기본 마진 제거 */
+        margin: 0 !important; 
       }
 
-      /* 6. ★로딩 영역 완벽한 가운데 정렬 (추가된 부분)★ */
+      /* 범인 검거: display 속성에 있던 !important를 제거하여 JS가 숨길 수 있게 수정 */
       #unity-loading-bar {
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        display: flex !important;
-        flex-direction: column !important; /* 세로로 배치 */
-        align-items: center !important; /* 가로 가운데 정렬 */
+        display: flex; 
+        flex-direction: column !important; 
+        align-items: center !important; 
         justify-content: center !important;
       }
 
-      /* 로고와 로딩 바 사이의 간격 띄우기 */
       #unity-progress-bar-empty {
         margin-top: 20px !important; 
       }
@@ -132,11 +126,10 @@
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
-      } else {
-        // Desktop style: CSS가 다 처리하므로 JS에서의 강제 크기 할당은 삭제
       }
 
-      document.querySelector("#unity-loading-bar").style.display = "block";
+      // 수정 포인트: 로딩 바를 화면에 띄울 때 block이 아닌 flex로 띄워서 가운데 정렬 유지
+      document.querySelector("#unity-loading-bar").style.display = "flex";
 
       var script = document.createElement("script");
       script.src = loaderUrl;
