@@ -10,36 +10,44 @@
     
     <style>
       /* 1. 유니티 로고 및 하단 푸터 숨기기 */
-      #unity-logo { display: none !important; }
-      #unity-footer { display: none !important; }
+      #unity-logo, #unity-footer { display: none !important; }
       
-      /* 2. 배경 및 화면 정렬 */
+      /* 2. 배경 및 화면 정렬 (style.css 설정을 완전히 덮어쓰는 중앙 정렬) */
       body {
-        margin: 0;
-        padding: 0;
-        background-color: #222C36; /* 어두운 배경색 */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: #222C36 !important; /* 원하시는 배경색으로 변경 가능 */
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        overflow: hidden !important;
       }
 
-      /* 3. 1080x1920 (9:16) 비율 고정 컨테이너 */
+      /* 3. 컨테이너 비율 고정 및 위치 강제 초기화 (오른쪽 밀림 방지) */
       #unity-container {
-        width: 100vw;
-        height: 100vh;
-        max-width: 1080px; 
-        max-height: 1920px;
-        aspect-ratio: 9 / 16; 
-        position: relative;
-        background-color: black; /* 로딩 전 빈 화면 색상 */
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        
+        /* 화면 높이에 맞추어 예쁜 9:16 비율 유지 */
+        height: 100% !important;
+        width: auto !important;
+        aspect-ratio: 9 / 16 !important;
+        
+        max-width: 1080px !important; 
+        max-height: 1920px !important;
+        background-color: black !important;
       }
 
-      /* 4. 캔버스 꽉 채우기 */
+      /* 4. 캔버스 영역 꽉 채우기 */
       #unity-canvas {
         width: 100% !important;
         height: 100% !important;
+        object-fit: contain !important;
       }
     </style>
   </head>
@@ -95,7 +103,6 @@
         showBanner: unityShowBanner,
       };
 
-      // JS 단의 사이즈 강제 할당 제거 (CSS가 대신 완벽하게 처리함)
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
